@@ -11,11 +11,11 @@ import com.rodrigomirandamarenco.tictactoekotlin.viewmodel.TicTacToeViewModel
 
 class MainActivity : AppCompatActivity() {
 
-    var viewModel = TicTacToeViewModel()
+    private var viewModel = TicTacToeViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        var dataBinding : ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        val dataBinding : ActivityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         dataBinding.viewModel = viewModel
         viewModel.onCreate()
     }
@@ -36,18 +36,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        var inflater = menuInflater
+        val inflater = menuInflater
         inflater.inflate(R.menu.menu_tictactoe, menu)
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.itemId) {
-            R.id.action_reset -> {
-                viewModel.onResetSelected()
-                return true
-            }
-            else -> return super.onOptionsItemSelected(item)
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean = when (item?.itemId) {
+        R.id.action_reset -> {
+            viewModel.onResetSelected()
+            true
         }
+        else -> super.onOptionsItemSelected(item)
     }
 }

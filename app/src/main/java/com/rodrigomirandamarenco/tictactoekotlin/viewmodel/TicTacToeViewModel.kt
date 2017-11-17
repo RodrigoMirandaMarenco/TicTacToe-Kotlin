@@ -7,6 +7,7 @@ import com.rodrigomirandamarenco.tictactoekotlin.model.Player
 
 /**
  * Created by rodrigomiranda on 11/16/17.
+ * ViewModel used for Model-View-ViewModel Architecture
  */
 class TicTacToeViewModel : ViewModel {
 
@@ -14,11 +15,6 @@ class TicTacToeViewModel : ViewModel {
     val winner: ObservableField<Player> = ObservableField()
     var winnerString: ObservableField<String> = ObservableField()
     private var model: Board = Board()
-
-    constructor() {
-        model = Board()
-        winnerString.set("")
-    }
 
     override fun onCreate() {
 
@@ -44,9 +40,14 @@ class TicTacToeViewModel : ViewModel {
     }
 
     fun onClickedCellAt(row: Int, column: Int) {
-        var playerThatMoved: Player? = model.mark(row, column)
+        val playerThatMoved: Player? = model.mark(row, column)
         cells.put("" + row + column, playerThatMoved?.toString())
         winner.set(model.winner)
         winnerString.set("" + model.winner)
+    }
+
+    init {
+        model = Board()
+        winnerString.set("")
     }
 }

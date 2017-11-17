@@ -2,17 +2,14 @@ package com.rodrigomirandamarenco.tictactoekotlin.model
 
 /**
  * Created by rodrigomiranda on 11/16/17.
+ * Board model used to start a new game
  */
 class Board {
 
     var winner: Player? = null
-    lateinit var state: GameState
-    lateinit var currentTurn: Player
-    val cells = Array<Array<Cell?>>(3) { arrayOfNulls(3) }
-
-    constructor()  {
-        restart()
-    }
+    private lateinit var state: GameState
+    private lateinit var currentTurn: Player
+    private val cells = Array<Array<Cell?>>(3) { arrayOfNulls(3) }
 
     fun restart() {
         clearCells()
@@ -42,10 +39,10 @@ class Board {
     }
 
     private fun isWinningMoveByPlayer(player: Player, currentRow: Int, currentColumn: Int): Boolean =
-        cells[currentRow][0]?.value == player && cells[currentRow][1]?.value == player && cells[currentRow][2]?.value == player ||
-                cells[0][currentColumn]?.value == player && cells[1][currentColumn]?.value == player && cells[2][currentColumn]?.value == player ||
-                currentRow == currentColumn && cells[0][0]?.value == player && cells[1][1]?.value == player && cells[2][2]?.value == player ||
-                currentRow + currentColumn == 2 && cells[0][2]?.value == player && cells[1][1]?.value == player && cells[2][0]?.value == player
+            cells[currentRow][0]?.value == player && cells[currentRow][1]?.value == player && cells[currentRow][2]?.value == player ||
+                    cells[0][currentColumn]?.value == player && cells[1][currentColumn]?.value == player && cells[2][currentColumn]?.value == player ||
+                    currentRow == currentColumn && cells[0][0]?.value == player && cells[1][1]?.value == player && cells[2][2]?.value == player ||
+                    currentRow + currentColumn == 2 && cells[0][2]?.value == player && cells[1][1]?.value == player && cells[2][0]?.value == player
 
     private fun flipCurrentTurn() {
         currentTurn = if (currentTurn == Player.X) Player.O else Player.X
@@ -67,6 +64,8 @@ class Board {
         return playerThatMoved
     }
 
-    fun valueAtCell(row: Int, column: Int): Player? = cells[row][column]?.value
+    init {
+        restart()
+    }
 
 }

@@ -13,7 +13,7 @@ class TicTacToeViewModel : ViewModel {
 
     val cells: ObservableArrayMap<String, String> = ObservableArrayMap()
     val winner: ObservableField<Player> = ObservableField()
-    var winnerString: ObservableField<String> = ObservableField()
+
     private var model: Board = Board()
 
     override fun onCreate() {
@@ -35,19 +35,16 @@ class TicTacToeViewModel : ViewModel {
     fun onResetSelected() {
         model.restart()
         winner.set(null)
-        winnerString.set("")
         cells.clear()
     }
 
     fun onClickedCellAt(row: Int, column: Int) {
         val playerThatMoved: Player? = model.mark(row, column)
-        cells.put("" + row + column, playerThatMoved?.toString())
+        cells.put("""$row$column""", playerThatMoved?.toString())
         winner.set(model.winner)
-        winnerString.set("" + model.winner)
     }
 
     init {
         model = Board()
-        winnerString.set("")
     }
 }

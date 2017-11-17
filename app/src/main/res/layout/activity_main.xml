@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:textSize="40sp"
-                android:text="@{viewModel.winnerString}"
+                android:text="@{viewModel.winner.name()}"
                 tools:text="X" />
 
             <TextView
